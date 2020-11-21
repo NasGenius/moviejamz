@@ -1,16 +1,24 @@
-var movieSoundtrack = "";
-var soundtrackYear = "";
-var iTunesSearchURL = "https://itunes.apple.com/search?parameterkeyvalue";
+$(document).ready(function() {
+  $('#search').click(function() {
+      
+            var media = "music";  
+            var limitOfSearchResults = 1;  
+            var thing = document.getElementById('itunesSearch').value;
+            var whatosearch = $('#itunesSearch').attr('value'); 
 
-$.ajax({
-    url: iTunesSearchURL,
-    method: 'GET'
-    keyvalue=1234567890
-}).then(function(response) {
-console.log(response);
-var soundtrackInfo = {
-    title: response.results[0].title,
-    year: response.results[0].description,
-    poster: response.results[0].image,
-    id: response.results[0].id
-}
+            $.getJSON("http://itunes.apple.com/search?term=" + thing   
+                        + "&country=us&limit=" + limitOfSearchResults   
+                        + "&media=" + media
+                        + "&callback=?",function(data) {  
+
+                songname = data["results"][0].trackName;
+                resultPlaylist = createPlaylist(song);
+                alert(resultPlaylist); 
+
+                });
+          function createPlaylist(song){
+           var playlist = new Array ();
+           playlist.push(song);
+           return playlist.length; 
+
+          )};
