@@ -19,15 +19,18 @@ body {
     left: 50%;
     transform: translate(-50%, -50%); 
     text-align: center;
-    background-color: darkorange;
+    background-color: #242424;
     border-radius: 15px;
     padding: 4rem;
     margin: 20px;
-    width: 600px;
+    width: 700px;
 }
 
-.jumbotron{
-    color: whitesmoke;
+.header{
+    position: absolute;
+    transform: translate(-50%, -50%); 
+    top: 15%;
+    left: 51%;
     
 }
 
@@ -42,7 +45,7 @@ body {
     padding: 5px 15px;
     font-size: 30px;
     border: 5px;
-    color: orange;
+    color: #242424;
     outline: none;
     border-radius: 25px;
     cursor: pointer;
@@ -70,9 +73,9 @@ hr {
 
 #inputbar{
     border-radius: 5px;
-    width: 200px;
+    width: 300px;
     float: left;
-    margin: 30px;
+    margin: 33px;
 
 }
 
