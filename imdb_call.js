@@ -1,5 +1,5 @@
-var movie = "dazed and confused";
-var movieYear = ""
+var movie = "cats";
+var movieYear = "2019"
 var imdbSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_7ln5s4c3/" + movie + "" + movieYear;
 
 $.ajax({
@@ -9,25 +9,27 @@ $.ajax({
 console.log(response);
 var movieInfo = {
     title: response.results[0].title,
-    year: response.results[0].description,
     poster: response.results[0].image,
     id: response.results[0].id
 }
-var imdbFullCastSearchURL = "https://imdb-api.com/en/API/FullCast/k_7ln5s4c3/" + movieInfo.id;
+var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_7ln5s4c3/" + movieInfo.id + "/FullActor,FullCast";
 $.ajax({
-    url: imdbFullCastSearchURL,
+    url: imdbFullActorSearchURL,
     method: "GET"
 }).then(function(response){
     console.log(response);
-var soundtrackInfo = {
-    composer: response.others[1].items[0].name
-}
+    var castAndCrewInfo = {
+        stars: response.stars,
+        director: response.directors,
+        composer: response.fullCast.others[1].items[0].name,
+        year: response.year
+    }
+
     console.log(movieInfo);
 $('#movie-poster').attr('src', movieInfo.poster);
-$('body').append("<h1>Composer: " + soundtrackInfo.composer);
+$('.movie-info').append('<ul><li>' + movieInfo.title + '</li><li>Release Year: ' + castAndCrewInfo.year + '</li><li>Music by: ' + castAndCrewInfo.composer + '</li><li>Starring: ' + castAndCrewInfo.stars + '</li><li>Directed by: ' + castAndCrewInfo.director + '</li></ul>')
+
 
 });
-
-
 
 });
