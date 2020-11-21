@@ -58,6 +58,11 @@ hr {
 
 .soundtracklist {
     color: white;
+    clear: both;
+}
+
+.movie-info {
+    text-align: left;
     float: right;
 }
 
