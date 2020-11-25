@@ -50,10 +50,8 @@
         </div>
       </div>
     </nav>
-
-    <hr>
     
-    <section class="hero ">
+    <section class="hero">
       <div class="hero-body has-text-centered">
         <h1 class="title column is-mobile">
           <img class="header " id="logo"  src="./assets/project logo.png"> <img src="./assets/icon1-2.png" height="100px" width="100px">
@@ -63,31 +61,43 @@
 
     <hr>
 
-    <div class="container">
-      <div class="notification is-primary">
-        <p id="description">Ever watched a movie and heard a great song but never knew what it was, then after tons of web searching you eventually just gave up?</p>
-        <p id="description"> Well MovieJamz is here to help! Just put any moive in the search bar and we will find the hit songs for you.</p>
-      </div>
-      
-      <div class="field columns">
-        <div class="control column is-3">
-          <input class="input is-rounded" type="text" placeholder="Search">
-        </div>
-        <button class="column is-1">Search</button>
-      </div>  
-    </div>
-
-    <section class="section">
-      <div class="container">
-        <h1 class="title">"Search Result"</h1>
+    <section class="container columns is-fluid ">
+      <div class = "container">
+        <div class = "notification is-dark has-text-centered">
+          Ever watched a movie and heard a great song but never knew what it was, then after tons of web searching you eventually just gave up?
+          <p>Well MovieJamz is here to help! Just put any moive in the search bar and we will find the hit songs for you.</p>
+        </div> 
       </div>
     </section>
 
-    <div class="container">
-      <div class="movie-poster columns">
-        <img src="http://placehold.it/250x350" class="img-fluid column is-3" alt="Responsive image">
+    <section class="columns is-mobile is-centered">
+     <div class="field has-addons">
+        <div class="control column">
+          <input class="input is-large" type="text" placeholder="Search">
+        </div>
+        <div class="control column">
+          <a class="button is-dark is-large">
+            Search
+          </a>
+        </div>
+      </div>
+       
+    </section>
 
-        <div class="soundtracklist column is-8">
+    
+    
+      
+    <section class="colums is-mobile is-centered">
+      <div class="container content">
+        <h1 class="movietitle">"Search Result"</h1>
+      </div>
+    </section>
+
+    <div class="container ">
+      <div class="movie-poster columns">
+        <img src="http://placehold.it/150x250" class="column is-2" alt="Responsive image">
+
+        <div class="soundtracklist has-text-left">
           <div class="songresult" id="song1">Song 1</div>
           <div class="songresult" id="song2">Song 2</div>
           <div class="songresult" id="song3">Song 3</div>
@@ -95,18 +105,22 @@
           <div class="songresult" id="song5">Song 5</div>
         </div>
       </div>
-
-      
     </div>
+    
 
     
 
     <footer class="footer">
-      <div class="content has-text-centered">
+      <div class="container footer-item has-text-centered">
+        <div class="container  has-text-centered">
+          Share on <a href="facebook.com">Facebook</a>
+          Share on <a href="twitter.com">Twitter</a>
+        </div>
         <p>
           <strong>MovieJamz</strong> Powered by <a href="https://bulma.io//">Bulma</a>. The source code is licensed
           <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
         </p>
+       
       </div>
     </footer>
 
