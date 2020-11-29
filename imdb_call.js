@@ -1,6 +1,6 @@
-var movie = "cats";
-var movieYear = "2019"
-var imdbSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_7ln5s4c3/" + movie + "" + movieYear;
+var movie = "star wars";
+var movieYear = "1983"
+var imdbSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_7ln5s4c3/" + movie + " " + movieYear;
 
 $.ajax({//First ajax call just gets the basic movie info like the official title, the poster, and it's IMDB id
     url: imdbSearchURL,
@@ -31,7 +31,7 @@ $('.movie-info').append('<ul><li><h3>' + movieInfo.title + '</h3></li><li>Releas
 
 
 var limitOfSearchResults = 5;
-var soundtrackURL = 'https://itunes.apple.com/search?media=music&term=' + movieInfo.title + '+motion+picture+soundtrack&limit=' + limitOfSearchResults + '&entity=album&attribute=albumTerm';
+var soundtrackURL = 'https://itunes.apple.com/search?media=music&term=' + encodeURIComponent(movieInfo.title) + '+motion+picture+soundtrack&limit=' + limitOfSearchResults + '&entity=album&attribute=albumTerm';
 //var composerURL = 
 //var actorsURL =
 
@@ -56,17 +56,26 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
             };
             i = 5;
             console.log(soundtrackInfo);
+            var tracklistURL = 'https://itunes.apple.com/lookup?id=' + soundtrackInfo.albumID + '&entity=song'
+            $.ajax({
+                url: tracklistURL,
+                method: "GET"
+            }).then(function(response){
+                var formattedTracklistResponse = JSON.parse(response);
+                console.log(formattedTracklistResponse);
+                for (i = 1; i < formattedTracklistResponse.results[0].trackCount; i++) {
+                    var track = {
+                        trackNumber: formattedTracklistResponse.results[i].trackNumber,
+                        trackName: formattedTracklistResponse.results[i].trackName,
+                        trackURL: formattedTracklistResponse.results[i].trackViewUrl
+                    };
+                    console.log(track);
+                }
+            })
+
 
         }
     }
-
-    /* if (genre = "Soundtrack") { *
-        var formattedResponse = JSON.parse(response);
-        console.log(formattedResponse);
-        console.log(typeof formattedResponse);
-/*    } else */
-    
-    //var soundtrackInfo = {
 
     });
 
