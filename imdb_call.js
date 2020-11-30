@@ -26,8 +26,14 @@ $.ajax({ //Second ajax call gets additional movie info to be used to add more it
     }
 
     console.log(movieInfo);
-$('#movie-poster').attr('src', movieInfo.poster);
-$('.movie-info').append('<ul><li><h3>' + movieInfo.title + '</h3></li><li>Release Year: ' + castAndCrewInfo.year + '</li><li>Music by: ' + castAndCrewInfo.composer + '</li><li>Starring: ' + castAndCrewInfo.stars + '</li><li>Directed by: ' + castAndCrewInfo.director + '</li></ul>')
+    $('#movie-content').attr('style','display: initial;');
+$('#movie-poster').attr('src', movieInfo.poster).attr('alt','Movie poster for' + movieInfo.title + '.');
+$('#release-year').text(castAndCrewInfo.year);
+$('#movie-title').text(movieInfo.title);
+$('#composer').text(castAndCrewInfo.composer);
+$('#starring').text(castAndCrewInfo.stars);
+$('#director').text(castAndCrewInfo.director);
+
 
 
 
@@ -74,7 +80,7 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
             }).then(function(response){
                 var formattedTracklistResponse = JSON.parse(response);
                 console.log(formattedTracklistResponse);
-                $('#tracklist').append('<div class="notification is-dark songresult"><b>Soundtrack Title:</b> ' + soundtrackInfo.albumName + '</div>')
+                $('#soundtrack').append('<div class="notification is-dark"><h3 class="has-text-weight-bold is-size-4">Soundtrack Title:</h3><p class="is-size-4">' + soundtrackInfo.albumName + '</p></div><div class="notification is-dark"><div class="content"><p><b>Tracklist</b> | Click the link to access Apple Music</p><ol type="1" id="tracklist"></ol></div></div>')
                 for (i = 1; i < formattedTracklistResponse.results[0].trackCount; i++) {
                     var track = {
                         trackNumber: formattedTracklistResponse.results[i].trackNumber,
@@ -82,7 +88,7 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
                         trackURL: formattedTracklistResponse.results[i].trackViewUrl
                     };
                     console.log(track);
-                    $('#tracklist').append('<div class="notification is-dark songresult" id="song1">' + track.trackNumber + '. <a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></div>')
+                    $('#tracklist').append('<li><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></li>')
                 }
             })
 

@@ -86,34 +86,34 @@
 
     
   <section class="section">
-    <div class="container">
+    <div id="movie-content" class="container" style="display: none;">
       <div class="columns">
         <div class="column">
           <div class="bd-notification">
-            <img src="http://placehold.it/350x550" class="column" alt="Responsive image">
+            <img id="movie-poster" src="http://placehold.it/350x550" class="column" alt="">
           </div>
         </div>
         <div class="column">
           <div class="notification">
             <div class="notification is-dark has-text-centered">
-              <h1 class="movietitle has-text-weight-bold is-size-3">"Movie Title"</h1>
+              <h1 id="movie-title" class="movietitle has-text-weight-bold is-size-3"></h1>
+              <p><b>Release Year:</b> <span id="release-year"></span></p>
             </div>
             <div class="notification is-dark">
-              <p>release year</p>
-              <p>composer</p>
-              <p>short description</p>
+              
+              <p><b>Composer:</b> <span id="composer"></span></p>
             </div>
             <div class="notification is-dark">
-              <p>top actors/actresses</p>
+              <p><b>Starring:</b> <span id="starring"></span></p>
             </div>
             <div class="notification is-dark">
-              <p>director and crew</p>
+              <p><b>Director:</b> <span id="director"></span></p>
             </div>
           </div>  
         </div>
         <div class="column">
           <div class="notification">
-            <div id="tracklist" class="soundtracklist has-text-left">
+            <div id="soundtrack" class="soundtracklist has-text-left">
             </div>
           </div>  
         </div>
