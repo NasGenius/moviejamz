@@ -74,6 +74,7 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
             }).then(function(response){
                 var formattedTracklistResponse = JSON.parse(response);
                 console.log(formattedTracklistResponse);
+                $('#tracklist').append('<div class="notification is-dark songresult"><b>Soundtrack Title:</b> ' + soundtrackInfo.albumName + '</div>')
                 for (i = 1; i < formattedTracklistResponse.results[0].trackCount; i++) {
                     var track = {
                         trackNumber: formattedTracklistResponse.results[i].trackNumber,
@@ -81,6 +82,7 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
                         trackURL: formattedTracklistResponse.results[i].trackViewUrl
                     };
                     console.log(track);
+                    $('#tracklist').append('<div class="notification is-dark songresult" id="song1">' + track.trackNumber + '. <a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></div>')
                 }
             })
 
