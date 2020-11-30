@@ -1,83 +1,143 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MovieJamz</title>
-    <!-- <link rel="stylesheet" href="css/foundation.css" /> -->
-    <title>Movie Jamz</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.css" rel="stylesheet"/> 
   </head>
-
-
   <body>
-    <div class="top-bar">
-        <div class="top-bar-left">
-          <ul class="dropdown menu" data-dropdown-menu>
-            <li class="menu-text">MovieJamz</li>
-            <li><a href="#">New Moviez</a></li>
-            <li><a href="#">Top Searches</a></li>
-          </ul>
-        </div>
-        <div class="top-bar-right">
-          <ul class="menu">
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="./index.html">
+          <img src="./assets/projecttitleicon.png" width="70" height="28">
+        </a>
     
-          </ul>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            New Moviez
+          </a>
+    
+          <a class="navbar-item">
+            Top Searches
+          </a>
+    
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+    
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                About
+              </a>
+              
+              <a class="navbar-item">
+                Contact
+              </a>
+              <hr class="navbar-divider">
+            </div>
+          </div>
         </div>
       </div>
+    </nav>
+    
+    <section class="hero">
+      <div class="hero-body has-text-centered">
+        <h1 class="title column is-mobile">
+          <img class="header " id="logo"  src="./assets/project logo.png"> <img src="./assets/icon1-2.png" height="100px" width="100px">
+        </h1>
+      </div>
+    </section>
 
-      <img class="header " id="logo"  src="./assets/project logo.png">
+    <hr>
 
+    <section class="container columns is-fluid ">
+      <div class = "container">
+        <div class = "notification is-dark has-text-centered">
+          Ever watched a movie and heard a great song but never knew what it was, then after tons of web searching you eventually just gave up?
+          <p>Well MovieJamz is here to help! Just put any moive in the search bar and we will find the hit songs for you.</p>
+        </div> 
+      </div>
+    </section>
+
+    <section class="columns is-mobile is-centered">
+     <div class="field has-addons">
+        <div class="control column">
+          <input class="input is-large" type="text" placeholder="Search">
+        </div>
+        <div class="control column">
+          <a class="button is-dark is-large">
+            Search
+          </a>
+        </div>
+      </div>
+       
+    </section>
+
+    
+  <section class="section">
     <div class="container">
-        <div class="description-box">
-            <p>Ever watched a movie and heard a great song but never knew what it was, then after tons of web searching you eventually just gave up? Well MovieJamz is here to help! Just put any moive in the search bar and we will find the hit songs for you.
-
-            </p>
+      <div class="columns">
+        <div class="column">
+          <div class="bd-notification">
+            <img src="http://placehold.it/350x550" class="column" alt="Responsive image">
+          </div>
         </div>
-
-        <div class="user-input">
-            <input type="search" id="inputbar">
-            <button class="search-button">Search</button>
+        <div class="column">
+          <div class="notification">
+            <div class="notification is-dark has-text-centered">
+              <h1 class="movietitle has-text-weight-bold is-size-3">"Movie Title"</h1>
+            </div>
+            <div class="notification is-dark">
+              <p>release year</p>
+              <p>composer</p>
+              <p>short description</p>
+            </div>
+            <div class="notification is-dark">
+              <p>top actors/actresses</p>
+            </div>
+            <div class="notification is-dark">
+              <p>director and crew</p>
+            </div>
+          </div>  
         </div>
-
-        <hr>   
-
-        <div class="results-box">
-
-            <div class="movie-poster">
-              <img>
+        <div class="column">
+          <div class="notification">
+            <div class="soundtracklist has-text-left">
+              <div class="notification is-dark songresult" id="song1">Song 1</div>
+              <div class="notification is-dark songresult" id="song2">Song 2</div>
+              <div class="notification is-dark songresult" id="song3">Song 3</div>
+              <div class="notification is-dark songresult" id="song4">Song 4</div>
+              <div class="notification is-dark songresult" id="song5">Song 5</div>
             </div>
-
-            <div class="movie-info">
-            </div>
-
-            <div class="soundtracklist">
-                <div class="songresult" id="song1"></div>
-                <div class="songresult" id="song2"></div>
-                <div class="songresult" id="song3"></div>
-                <div class="songresult" id="song4"></div>
-                <div class="songresult" id="song5"></div>
-            </div>
-
+          </div>  
         </div>
+      </div>
     </div>
+  </section>
+    <footer class="footer">
+      <div class="container footer-item has-text-centered">
+        <div class="container  has-text-centered">
+          Share on <a href="facebook.com">Facebook</a>
+          Share on <a href="twitter.com">Twitter</a>
+        </div>
+        <p>
+          <strong>MovieJamz</strong> Powered by <a href="https://bulma.io//">Bulma</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+        </p>
+       
+      </div>
+    </footer>
 
-    <!-- <script src="js/vendor/jquery.js"></script>
-    <script src="js/vendor/what-input.js"></script>
-    <script src="js/vendor/foundation.min.js"></script>
-    <script>
-      $(document).foundation();
-    </script> -->
-    
-    
-    <script
-  src="https://code.jquery.com/jquery-3.5.1.min.js"
-  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-  crossorigin="anonymous"></script>
-    <script src="imdb_call.js" type="text/javascript"></script>
-    <script src="script.js"></script>
-</body>
+  </body>
 </html>
