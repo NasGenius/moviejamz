@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MovieJamz</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.css" rel="stylesheet"/> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -73,13 +74,13 @@
     <section class="columns is-mobile is-centered">
      <div class="field has-addons">
         <div class="control column">
-          <input class="input is-large" type="text" placeholder="Search">
+          <input class="input is-large" id="searchBar" type="text">
         </div>
-        <div class="control column">
-          <a class="button is-dark is-large">
+        <form class="control column" id="movie-form">
+          <label class="button is-dark is-large" id="searchBtn">
             Search
-          </a>
-        </div>
+          </label>
+        </form>
       </div>
        
     </section>
@@ -90,24 +91,22 @@
       <div class="columns">
         <div class="column">
           <div class="bd-notification">
-            <img src="http://placehold.it/350x550" class="column" alt="Responsive image">
+            <img src="" class="column" id="movie-poster" alt="Movie Poster">
           </div>
         </div>
         <div class="column">
           <div class="notification">
             <div class="notification is-dark has-text-centered">
-              <h1 class="movietitle has-text-weight-bold is-size-3">"Movie Title"</h1>
+              <h1 class="movietitle has-text-weight-bold is-size-3" id="movie-title"></h1>
             </div>
-            <div class="notification is-dark">
-              <p>release year</p>
-              <p>composer</p>
-              <p>short description</p>
+            <div class="notification is-dark" id="movie-info">
+              <p></p>
             </div>
-            <div class="notification is-dark">
-              <p>top actors/actresses</p>
+            <div class="notification is-dark" id="movie-stars">
+              <p></p>
             </div>
-            <div class="notification is-dark">
-              <p>director and crew</p>
+            <div class="notification is-dark" id="movie-directors">
+              <p></p>
             </div>
           </div>  
         </div>
@@ -139,6 +138,6 @@
        
       </div>
     </footer>
-
+    <script src="./script.js"></script>
   </body>
 </html>
