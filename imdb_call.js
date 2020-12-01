@@ -1,5 +1,5 @@
 var movie = "moulin rouge";
-var movieYear = ""
+var movieYear = "";
 var imdbSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_7ln5s4c3/" + movie + " " + movieYear;
 
 $.ajax({//First ajax call just gets the basic movie info like the official title, the poster, and it's IMDB id
@@ -36,22 +36,20 @@ $('#director').text(castAndCrewInfo.director);
 
 
 
-
+//Need to remove special characters from the title returned from imdb to prevent issues with the itunes search
 var limitOfSearchResults = 5;
-/* var movieTitleEncoded = encodeURIComponent(movieInfo.title);
-var movieTitleWithPlus = movieInfo.title.replace(/%20/g,"+");
+var movieTitleWithoutColon = movieInfo.title.replace(/:/g,"");
+var movieTitleWithoutHyphen = movieTitleWithoutColon.replace(/-/g,"");
+var movieTitleEncoded = encodeURIComponent(movieTitleWithoutHyphen);
+var movieTitleWithPlus = movieTitleEncoded.replace(/%20/g,"+");
 console.log(movieTitleEncoded);
-console.log(movieTitleWithPlus); */
-var soundtrackURL = 'https://itunes.apple.com/search?media=music&term=' + movieInfo.title + '+motion+picture+soundtrack&limit=' + limitOfSearchResults + '&entity=album&attribute=albumTerm';
-var encodedSoundtrackURL = encodeURI(soundtrackURL);
-var soundTrackURLWithPlus = encodedSoundtrackURL.replace(/%20/g,"+");
-console.log(soundTrackURLWithPlus);
-//var composerURL = 
-//var actorsURL =
+console.log(movieTitleWithPlus);
+var soundtrackURL = 'https://itunes.apple.com/search?media=music&term=' + movieTitleWithPlus + '+motion+picture+soundtrack&limit=' + limitOfSearchResults + '&entity=album&attribute=albumTerm';
+ 
+console.log(soundtrackURL);
 
-
-$.ajax({//third ajax call returns any albums related to the movie along with soundtrack info
-    url: soundTrackURLWithPlus,
+$.ajax({ //third ajax call returns any albums related to the movie along with soundtrack info
+    url: soundtrackURL,
     method: 'GET'
 }).then(function(response){
     console.log(response);
@@ -102,3 +100,5 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
 });
 
 });
+
+
