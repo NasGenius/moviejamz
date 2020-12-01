@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MovieJamz</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.2/css/bulma.css" rel="stylesheet"/> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -73,12 +74,13 @@
     <section class="columns is-mobile is-centered">
      <div class="field has-addons">
         <div class="control column">
-          <input id="movie-search" class="input is-large" type="text" placeholder="Search">
-        <div class="control column">
-          <a class="button is-dark is-large">
-            Search
-          </a>
+          <input class="input is-large" id="searchBar" type="text">
         </div>
+        <form class="control column" id="movie-form">
+          <label class="button is-dark is-large" id="searchBtn">
+            Search
+          </label>
+        </form>
       </div>
        
     </section>
@@ -89,6 +91,7 @@
       <div class="columns">
         <div class="column">
           <div class="bd-notification">
+
             <img id="movie-poster" src="http://placehold.it/350x550" class="column" alt="">
           </div>
         </div>
