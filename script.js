@@ -1,5 +1,3 @@
-// var movie =
-// var movieYear = "";
 var searchBar = $('#searchBar');
 var searchBtn = $('#searchBtn');
 
