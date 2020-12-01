@@ -1,5 +1,5 @@
 var movie = "moulin rouge";
-var movieYear = ""
+var movieYear = "";
 var imdbSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_7ln5s4c3/" + movie + " " + movieYear;
 
 $.ajax({//First ajax call just gets the basic movie info like the official title, the poster, and it's IMDB id
@@ -26,26 +26,30 @@ $.ajax({ //Second ajax call gets additional movie info to be used to add more it
     }
 
     console.log(movieInfo);
-$('#movie-poster').attr('src', movieInfo.poster);
-$('.movie-info').append('<ul><li><h3>' + movieInfo.title + '</h3></li><li>Release Year: ' + castAndCrewInfo.year + '</li><li>Music by: ' + castAndCrewInfo.composer + '</li><li>Starring: ' + castAndCrewInfo.stars + '</li><li>Directed by: ' + castAndCrewInfo.director + '</li></ul>')
+    $('#movie-content').attr('style','display: initial;');
+$('#movie-poster').attr('src', movieInfo.poster).attr('alt','Movie poster for' + movieInfo.title + '.');
+$('#release-year').text(castAndCrewInfo.year);
+$('#movie-title').text(movieInfo.title);
+$('#composer').text(castAndCrewInfo.composer);
+$('#starring').text(castAndCrewInfo.stars);
+$('#director').text(castAndCrewInfo.director);
 
 
 
+//Need to remove special characters from the title returned from imdb to prevent issues with the itunes search
 var limitOfSearchResults = 5;
-/* var movieTitleEncoded = encodeURIComponent(movieInfo.title);
-var movieTitleWithPlus = movieInfo.title.replace(/%20/g,"+");
+var movieTitleWithoutColon = movieInfo.title.replace(/:/g,"");
+var movieTitleWithoutHyphen = movieTitleWithoutColon.replace(/-/g,"");
+var movieTitleEncoded = encodeURIComponent(movieTitleWithoutHyphen);
+var movieTitleWithPlus = movieTitleEncoded.replace(/%20/g,"+");
 console.log(movieTitleEncoded);
-console.log(movieTitleWithPlus); */
-var soundtrackURL = 'https://itunes.apple.com/search?media=music&term=' + movieInfo.title + '+motion+picture+soundtrack&limit=' + limitOfSearchResults + '&entity=album&attribute=albumTerm';
-var encodedSoundtrackURL = encodeURI(soundtrackURL);
-var soundTrackURLWithPlus = encodedSoundtrackURL.replace(/%20/g,"+");
-console.log(soundTrackURLWithPlus);
-//var composerURL = 
-//var actorsURL =
+console.log(movieTitleWithPlus);
+var soundtrackURL = 'https://itunes.apple.com/search?media=music&term=' + movieTitleWithPlus + '+motion+picture+soundtrack&limit=' + limitOfSearchResults + '&entity=album&attribute=albumTerm';
+ 
+console.log(soundtrackURL);
 
-
-$.ajax({//third ajax call returns any albums related to the movie along with soundtrack info
-    url: soundTrackURLWithPlus,
+$.ajax({ //third ajax call returns any albums related to the movie along with soundtrack info
+    url: soundtrackURL,
     method: 'GET'
 }).then(function(response){
     console.log(response);
@@ -74,6 +78,7 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
             }).then(function(response){
                 var formattedTracklistResponse = JSON.parse(response);
                 console.log(formattedTracklistResponse);
+                $('#soundtrack').append('<div class="notification is-dark"><h3 class="has-text-weight-bold is-size-4">Soundtrack Title:</h3><p class="is-size-4">' + soundtrackInfo.albumName + '</p></div><div class="notification is-dark"><div class="content"><p><b>Tracklist</b> | Click the link to access Apple Music</p><ol type="1" id="tracklist"></ol></div></div>')
                 for (i = 1; i < formattedTracklistResponse.results[0].trackCount; i++) {
                     var track = {
                         trackNumber: formattedTracklistResponse.results[i].trackNumber,
@@ -81,6 +86,7 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
                         trackURL: formattedTracklistResponse.results[i].trackViewUrl
                     };
                     console.log(track);
+                    $('#tracklist').append('<li><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></li>')
                 }
             })
 
@@ -94,3 +100,5 @@ $.ajax({//third ajax call returns any albums related to the movie along with sou
 });
 
 });
+
+
