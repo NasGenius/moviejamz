@@ -20,13 +20,7 @@ Project One
 * A search field
 * Utilize IMDB API to search for movie
 * Utilize iTunes API to take IMDB results and obtain movie soundtrack
-* A Save button that saves items to local storage
-   
-    
-### Psuedo code:  
-
-* Start with Document onload
-* 
+* A New Moviez and Top Searches button that saves items to local storage
     
 
 ### This project has script features of:
@@ -35,7 +29,8 @@ Project One
 * An event listener to save to local storage
 
 ### This project features responsive design using a  layout
-### Has responsive layout for: 
+### Has responsive layout for:
+
 ** Small devices (landscape phones, 576px and up)
 ** Medium devices (tablets, 768px and up)
 ** Large devices (desktops, 992px and up)
