@@ -4,6 +4,23 @@ for (i = 1895; i <= currentYear; i++) {
 }
 
 // function for imdb api call
+
+    var currentYear = moment().format('YYYY');
+    console.log(currentYear);
+    for (i = 1895; i <= currentYear; i++) {
+        $('#movie-year').append('<option>' + i + '</option>');
+    }
+
+
+
+/* searchBar[0].addEventListener('keyup', function(searchString) {
+    return searchBar = searchString.target.value;
+      
+});  */
+
+
+
+
 function movieSearch() {
 
 $('#soundtrack').empty();    
@@ -12,9 +29,15 @@ var movie = $('#searchBar').val();
 var movieYear = $('select').val();
 
 if (movieYear == 'Select Year (optional)') {
+
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_pfo2aetw/" + encodeURIComponent(movie);
 } else {
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_pfo2aetw/" + encodeURIComponent(movie) + '%20' + movieYear;
+
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie);
+} else {
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie) + '%20' + movieYear;
+
 };
     
 console.log(movieSearchURL);
@@ -30,8 +53,11 @@ console.log(movieSearchURL);
         title: response.results[0].title,
         poster: response.results[0].image,
         id: response.results[0].id
-    }
+  
     var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_pfo2aetw/" + movieInfo.id + "/FullActor,FullCast";
+
+    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_8pgddpof/" + movieInfo.id + "/FullActor,FullCast";
+
     $.ajax({
         url: imdbFullActorSearchURL,
         method: "GET"
@@ -103,8 +129,14 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
                         trackURL: formattedTracklistResponse.results[i].trackViewUrl
                     };
                     console.log(track);
+
                     $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></p></li>')
                 
+
+                    $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a>  <button class="button is-small">Save</button></p></li>')
+                
+            
+
                 
                 }
             })
@@ -116,7 +148,12 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
 }
 
 
+
 });
+
+
+    });
+
 
 });
     }
@@ -158,8 +195,9 @@ for (var i = 0; i <localStorage.length; i++) {
 
 
 
-//Code to save and store songs
 
+
+//Code to save and store songs
 
 // function saveSong(event) {
 //     event.preventDefault()
@@ -172,3 +210,63 @@ for (var i = 0; i <localStorage.length; i++) {
 //     trackURL: $(this).siblings().attr('href'),
 //     trackName: $(this).siblings().text()
 // }, saveSong);
+
+
+
+
+
+//Event listener to start the search
+
+$('#searchBtn').on('click', function(event) {
+    event.preventDefault();
+    movieSearch();
+});
+
+/////////////////////////////////////////////////
+
+
+//Code to save and store songs
+
+function log() {
+    console.log('test');
+}
+
+function saveSong(event) {
+    event.preventDefault();
+    var savedSongs = $('#saved-songs');
+    savedSongs.append('<a href="' + event.data.trackURL + '" class="navbar-item" target="_blank">' + event.data.trackName + '</a>');
+    localStorage.setItem = ('savedSongs', JSON.stringify(savedSongs));
+}
+
+$(document).on('click', {
+    trackURL: $(this).siblings().attr('href'),
+    trackName: $(this).siblings().text()
+}, saveSong);
+
+
+                       /*  
+                    }, saveSong); */
+
+/* $('.button is-small').click(function(event){
+    event.preventDefault();
+    var storedTrack = {
+        trackURL: $(this).siblings().attr('href'),
+        trackName: $(this).siblings().text()
+    }
+    $('#saved-songs').append('<a href="' + storedTrack.trackURL + '" class="navbar-item" target="_blank">' + storedTrack.trackName + '</a>')
+})
+ */
+
+
+    
+
+//////////////////////////////////////////
+
+
+/* $(document).on('click', '.track', function() {
+    var saveTitle = $(this).siblings().text();
+    var saveURL = $(this).siblings().attr('href');
+    console.log(saveTitle);
+    console.log(saveURL);
+    $('#saved-songs').append('<a href="' + saveURL + '" class="navbar-item" target="_blank">' + saveTitle + '</a>')
+}); */
