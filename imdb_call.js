@@ -1,7 +1,3 @@
-var currentYear = moment().format('YYYY');
-for (i = 1895; i <= currentYear; i++) {
-    $('#movie-year').append('<option>' + i + '</option>');
-}
 
 // function for imdb api call
 
@@ -30,10 +26,7 @@ var movieYear = $('select').val();
 
 if (movieYear == 'Select Year (optional)') {
 
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_pfo2aetw/" + encodeURIComponent(movie);
-} else {
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_pfo2aetw/" + encodeURIComponent(movie) + '%20' + movieYear;
-
+    
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie);
 } else {
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie) + '%20' + movieYear;
@@ -54,8 +47,7 @@ console.log(movieSearchURL);
         poster: response.results[0].image,
         id: response.results[0].id
   
-    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_pfo2aetw/" + movieInfo.id + "/FullActor,FullCast";
-
+    }
     var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_8pgddpof/" + movieInfo.id + "/FullActor,FullCast";
 
     $.ajax({
@@ -133,7 +125,7 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
                     $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></p></li>')
                 
 
-                    $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a>  <button class="button is-small">Save</button></p></li>')
+                    
                 
             
 
@@ -155,7 +147,7 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
     });
 
 
-});
+
     }
 
 });
@@ -227,7 +219,7 @@ $('#searchBtn').on('click', function(event) {
 
 //Code to save and store songs
 
-function log() {
+/* function log() {
     console.log('test');
 }
 
@@ -241,7 +233,7 @@ function saveSong(event) {
 $(document).on('click', {
     trackURL: $(this).siblings().attr('href'),
     trackName: $(this).siblings().text()
-}, saveSong);
+}, saveSong); */
 
 
                        /*  
