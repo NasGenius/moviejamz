@@ -1,3 +1,9 @@
+var currentYear = moment().format('YYYY');
+for (i = 1895; i <= currentYear; i++) {
+    $('#movie-year').append('<option>' + i + '</option>');
+}
+
+// function for imdb api call
 
     var currentYear = moment().format('YYYY');
     console.log(currentYear);
@@ -23,9 +29,15 @@ var movie = $('#searchBar').val();
 var movieYear = $('select').val();
 
 if (movieYear == 'Select Year (optional)') {
+
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_pfo2aetw/" + encodeURIComponent(movie);
+} else {
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_pfo2aetw/" + encodeURIComponent(movie) + '%20' + movieYear;
+
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie);
 } else {
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie) + '%20' + movieYear;
+
 };
     
 console.log(movieSearchURL);
@@ -41,8 +53,11 @@ console.log(movieSearchURL);
         title: response.results[0].title,
         poster: response.results[0].image,
         id: response.results[0].id
-    }
+  
+    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_pfo2aetw/" + movieInfo.id + "/FullActor,FullCast";
+
     var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_8pgddpof/" + movieInfo.id + "/FullActor,FullCast";
+
     $.ajax({
         url: imdbFullActorSearchURL,
         method: "GET"
@@ -61,10 +76,7 @@ console.log(movieSearchURL);
         $('#composer').text(castAndCrewInfo.composer);
         $('#starring').text(castAndCrewInfo.stars);
         $('#director').text(castAndCrewInfo.director);
-        //$('#movie-info').append('<div class="notification is-dark"><p><b>Composer:</b> ' + castAndCrewInfo.composer + '</p></div><div class="notification is-dark"><p><b>Starring:</b> ' + castAndCrewInfo.stars + '</p></div><div class="notification is-dark"><p><b>Director:</b> ' + castAndCrewInfo.director + '</p></div>' )
-/*         $('#movie-stars').text("Cast: " + castAndCrewInfo.stars);
-        $('#movie-directors').text("Director: " + castAndCrewInfo.director); */
-        //$('.movie-info').append('<ul><li><h3>' + movieInfo.title + '</h3></li><li>Release Year: ' + castAndCrewInfo.year + '</li><li>Music by: ' + castAndCrewInfo.composer + '</li><li>Starring: ' + castAndCrewInfo.stars + '</li><li>Directed by: ' + castAndCrewInfo.director + '</li></ul>');
+    
 
 //Need to remove special characters from the title returned from imdb to prevent issues with the itunes search
 
@@ -117,9 +129,14 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
                         trackURL: formattedTracklistResponse.results[i].trackViewUrl
                     };
                     console.log(track);
+
+                    $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></p></li>')
+                
+
                     $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a>  <button class="button is-small">Save</button></p></li>')
                 
             
+
                 
                 }
             })
@@ -132,7 +149,11 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
 
 
 
+});
+
+
     });
+
 
 });
     }
@@ -142,11 +163,53 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
 }
 
 
+//Event listener to start the search
+var trackList = $('#saved-songs')
+$('#searchBtn').on('click', function() {
+
+    //stores users input and appends to search history
+    var key = 'movietitle';
+    var value = $('#searchBar').val();
+
+    if (key && value) {
+        localStorage.setItem(key, value)
+        
+    }
+
+    for (var i = 0; i <localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const value = localStorage.getItem(key)
+    
+        trackList.append(`<a href=""> ${value} </a>`) 
+    }
+    
+    movieSearch();
+});
+
+for (var i = 0; i <localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key)
+
+    trackList.append(`<a href=""> ${value} </a>`) 
+}
 
 
 
 
 
+//Code to save and store songs
+
+// function saveSong(event) {
+//     event.preventDefault()
+//     var savedSongs = $('#saved-songs');
+//     savedSongs.append($('#track-name').text());
+//     localStorage.setItem = ('savedSongs', JSON.stringify(savedSongs));
+// }
+
+// $('document').on('click', {
+//     trackURL: $(this).siblings().attr('href'),
+//     trackName: $(this).siblings().text()
+// }, saveSong);
 
 
 
