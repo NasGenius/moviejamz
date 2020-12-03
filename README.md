@@ -1,6 +1,9 @@
 # MovieJamz
 Project One 
 
+### Authors
+* Austyn Whaley | Ryan Hubble | Billy Gray
+
 * ['MovieJamz GitHub']()
 * ['MovieJamz GitHub IO']()
 * ['MovieJamz Demo Video']()
@@ -8,13 +11,8 @@ Project One
 ![MovieJamz Demo]()
 
 ### Project MVP
-* 
-* 
-* 
-* 
+* Search and retrieve soundtrack for one movie.
 
-## Code Validation
-* Used Code Beauty for my code validation for HTML, Javascript, and CSS.
 
 ### This project has the following features: 
 * A search field
