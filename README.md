@@ -7,7 +7,7 @@ Project One
 ### MovieJamz Resources
 
 * ['MovieJamz GitHub'](https://github.com/NasGenius/moviejamz/tree/main)
-* ['MovieJamz GitHub IO']()
+* ['MovieJamz GitHub IO']( https://nasgenius.github.io/moviejamz/)
 * ['MovieJamz Demo Video']()
 
 ![MovieJamz Demo]()
