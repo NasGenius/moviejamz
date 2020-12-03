@@ -48,12 +48,13 @@ Project One
 * One HTML Pages
     * Index.html 
         * Contains search field. 
-* One CSS Page
+* One CSS Page (Bulma Framework)
     * Styles.css
         * Contains styling for changing attributes and buttons
 * One Javascript Page
-        * Contains: 
-        * Variables, including arrays and API calls
+    * Contains
+        * Variables
+        * APIs 
         * Event listeners
         * Functions 
         * Local Storage
