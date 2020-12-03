@@ -4,7 +4,9 @@ Project One
 ### Authors
 * Austyn Whaley | Ryan Hubble | Billy Gray
 
-* ['MovieJamz GitHub']()
+### MovieJamz Resources
+
+* ['MovieJamz GitHub'](https://github.com/NasGenius/moviejamz/tree/main)
 * ['MovieJamz GitHub IO']()
 * ['MovieJamz Demo Video']()
 
