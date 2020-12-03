@@ -28,9 +28,14 @@
             New Moviez
           </a>
     
-          <a class="navbar-item">
-            Top Searches
-          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Saved Songs
+            </a>
+    
+            <div id="saved-songs" class="navbar-dropdown">
+            </div>
+          </div>
     
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
@@ -114,6 +119,7 @@
         <div class="column">
           <div class="notification">
             <div id="soundtrack" class="soundtracklist has-text-left">
+              <li style="display: none;" class="track" ><p><a href="#" target="_blank"></a>  <button class="button is-small">Save</button></p></li>
             </div>
           </div>  
         </div>

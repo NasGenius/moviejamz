@@ -13,6 +13,8 @@
 });  */
 
 
+
+
 function movieSearch() {
 
 $('#soundtrack').empty();    
@@ -115,7 +117,19 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
                         trackURL: formattedTracklistResponse.results[i].trackViewUrl
                     };
                     console.log(track);
-                    $('#tracklist').append('<li><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></li>')
+                    $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a>  <button class="button is-small">Save</button></p></li>')
+                
+                    
+                    
+                    /* 
+                    }     */
+                    
+                    
+                
+                            
+                        
+    
+                
                 }
             })
 
@@ -140,7 +154,60 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
 
 
 
+
+
+//Event listener to start the search
+
 $('#searchBtn').on('click', function(event) {
     event.preventDefault();
     movieSearch();
 });
+
+/////////////////////////////////////////////////
+
+
+//Code to save and store songs
+
+function log() {
+    console.log('test');
+}
+
+function saveSong(event) {
+    event.preventDefault();
+    var savedSongs = $('#saved-songs');
+    savedSongs.append('<a href="' + event.data.trackURL + '" class="navbar-item" target="_blank">' + event.data.trackName + '</a>');
+    localStorage.setItem = ('savedSongs', JSON.stringify(savedSongs));
+}
+
+$(document).on('click', {
+    trackURL: 'url',
+    trackName: 'trackname'
+}, saveSong);
+
+
+                       /*  
+                    }, saveSong); */
+
+/* $('.button is-small').click(function(event){
+    event.preventDefault();
+    var storedTrack = {
+        trackURL: $(this).siblings().attr('href'),
+        trackName: $(this).siblings().text()
+    }
+    $('#saved-songs').append('<a href="' + storedTrack.trackURL + '" class="navbar-item" target="_blank">' + storedTrack.trackName + '</a>')
+})
+ */
+
+
+    
+
+//////////////////////////////////////////
+
+
+/* $(document).on('click', '.track', function() {
+    var saveTitle = $(this).siblings().text();
+    var saveURL = $(this).siblings().attr('href');
+    console.log(saveTitle);
+    console.log(saveURL);
+    $('#saved-songs').append('<a href="' + saveURL + '" class="navbar-item" target="_blank">' + saveTitle + '</a>')
+}); */
