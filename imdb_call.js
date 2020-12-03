@@ -23,9 +23,9 @@ var movie = $('#searchBar').val();
 var movieYear = $('select').val();
 
 if (movieYear == 'Select Year (optional)') {
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_7ln5s4c3/" + encodeURIComponent(movie);
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie);
 } else {
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_7ln5s4c3/" + encodeURIComponent(movie) + '%20' + movieYear;
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie) + '%20' + movieYear;
 };
     
 console.log(movieSearchURL);
@@ -42,7 +42,7 @@ console.log(movieSearchURL);
         poster: response.results[0].image,
         id: response.results[0].id
     }
-    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_7ln5s4c3/" + movieInfo.id + "/FullActor,FullCast";
+    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_8pgddpof/" + movieInfo.id + "/FullActor,FullCast";
     $.ajax({
         url: imdbFullActorSearchURL,
         method: "GET"
@@ -67,14 +67,14 @@ console.log(movieSearchURL);
         //$('.movie-info').append('<ul><li><h3>' + movieInfo.title + '</h3></li><li>Release Year: ' + castAndCrewInfo.year + '</li><li>Music by: ' + castAndCrewInfo.composer + '</li><li>Starring: ' + castAndCrewInfo.stars + '</li><li>Directed by: ' + castAndCrewInfo.director + '</li></ul>');
 
 //Need to remove special characters from the title returned from imdb to prevent issues with the itunes search
-var limitOfSearchResults = 5;
+
 var movieTitleWithoutColon = movieInfo.title.replace(/:/g,"");
 var movieTitleWithoutHyphen = movieTitleWithoutColon.replace(/-/g,"");
 var movieTitleEncoded = encodeURIComponent(movieTitleWithoutHyphen);
 var movieTitleWithPlus = movieTitleEncoded.replace(/%20/g,"+");
 console.log(movieTitleEncoded);
 console.log(movieTitleWithPlus);
-var soundtrackURL = 'https://itunes.apple.com/search?media=music&term=' + movieTitleWithPlus + '+motion+picture+soundtrack&limit=' + limitOfSearchResults + '&entity=album&attribute=albumTerm';
+var soundtrackURL = 'https://itunes.apple.com/search?term=' + movieTitleWithPlus + '+soundtrack';
  
 console.log(soundtrackURL);
 
@@ -86,9 +86,9 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
     var formattedResponse = JSON.parse(response);
     if (formattedResponse.resultCount == 0) {
         console.log("No results found");
-        $('#soundtrack').append('<div class="notification is-dark"><p class="is-size-4">No soundtrack could be found.</p></div>')
+        $('#soundtrack').append('<div class="notification is-dark"><p class="is-size-4">No soundtrack could be found.</p></div>');
     } else {
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < formattedResponse.resultCount; i++) {
         console.log(formattedResponse.results[i]);
         var genre = formattedResponse.results[i].primaryGenreName;
         var albumRelease = formattedResponse.results[i].releaseDate;
@@ -100,7 +100,7 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
             albumID: formattedResponse.results[i].collectionId,
             albumURL: formattedResponse.results[i].collectionViewUrl,
             };
-            i = 5;
+            i = formattedResponse.resultCount;
             console.log(soundtrackInfo);
             var tracklistURL = 'https://itunes.apple.com/lookup?id=' + soundtrackInfo.albumID + '&entity=song'
             $.ajax({
@@ -119,24 +119,18 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
                     console.log(track);
                     $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a>  <button class="button is-small">Save</button></p></li>')
                 
-                    
-                    
-                    /* 
-                    }     */
-                    
-                    
-                
-                            
-                        
-    
+            
                 
                 }
             })
 
 
-        }
+        } 
+
     }
 }
+
+
 
     });
 
@@ -145,10 +139,12 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
 
 });
 
-
-
-
 }
+
+
+
+
+
 
 
 
@@ -180,8 +176,8 @@ function saveSong(event) {
 }
 
 $(document).on('click', {
-    trackURL: 'url',
-    trackName: 'trackname'
+    trackURL: $(this).siblings().attr('href'),
+    trackName: $(this).siblings().text()
 }, saveSong);
 
 
