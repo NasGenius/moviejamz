@@ -5,9 +5,9 @@ Project One
 * ['MovieJamz GitHub IO']()
 * ['MovieJamz Demo Video']()
 
-![Day-Planner Demo]()
+![MovieJamz Demo]()
 
-### Summary
+### Project MVP
 * 
 * 
 * 
