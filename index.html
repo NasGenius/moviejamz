@@ -15,33 +15,31 @@
           <img src="./assets/projecttitleicon.png" width="70" height="28">
         </a>
     
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger burger" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-      </div>
     
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
     
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
-              Saved Jamz
+              Searched Jamz
             </a>
     
-            <div class="navbar-dropdown">
-              <a class="navbar-item" id="saved-track">
-                
-              </a> 
+            <div id="saved-songs" class="navbar-dropdown">
             </div>
           </div>
     
-          
           <a class="navbar-item" href="./contact.html">
             Contact
           </a>
-          
+              
+              
+          </div>
+          </div>
         </div>
       </div>
     </nav>
@@ -65,8 +63,8 @@
       </div>
     </section>
 
-    <section class="columns is-mobile is-centered has-text-centered">
-     <div class="field has-addons has-text-centered">
+    <section class="columns is-mobile is-centered">
+     <div class="field has-addons">
         <div class="control column">
           <input class="input is-large" id="searchBar" type="text">
           <div class="select">
@@ -83,6 +81,8 @@
       </div>
        
     </section>
+
+    
   <section class="section">
     <div id="movie-content" class="container" style="display: none;">
       <div class="columns">
@@ -101,18 +101,18 @@
             <div class="notification is-dark"><p><b>Composer:</b> <span id="composer"></span></p></div>
             <div class="notification is-dark"><p><b>Starring:</b> <span id="starring"></span></p></div>
             <div class="notification is-dark"><p><b>Director:</b> <span id="director"></span></p></div>
-            <div class="notification is-dark"><p><b>Plot:</b> <span id="plot"></span></p>
-              </div>
           </div>  
         </div>
         <div class="column">
           <div class="notification">
             <div id="soundtrack" class="soundtracklist has-text-left">
+              <li style="display: none;" class="track" ><p><a href="#" target="_blank" id="track-name"></a>  <button class="button is-small" id="saveSongBtn">Save</button></p></li>
             </div>
-          </div>
+          </div>  
         </div>
       </div>
-    </section>
+    </div>
+  </section>
     <footer class="footer">
       <div class="container footer-item has-text-centered">
         <div class="container  has-text-centered">

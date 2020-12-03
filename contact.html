@@ -10,41 +10,41 @@
   <body>
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="./index.html">
-          <img src="./assets/projecttitleicon.png" width="70" height="28">
-        </a>
-    
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-    
-      <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-    
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              Saved Jamz
-            </a>
-    
-            <div class="navbar-dropdown">
-              <a class="navbar-item" id="saved-track">
-                
-              </a> 
-            </div>
-          </div>
-    
-          
-          <a class="navbar-item">
-            Contact
+        <div class="navbar-brand">
+          <a class="navbar-item" href="./index.html">
+            <img src="./assets/projecttitleicon.png" width="70" height="28">
           </a>
-          
+      
+          <a role="button" class="navbar-burger burger" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-      </div>
-    </nav>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Saved Jamz
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item" id="saved-track">
+                  
+                </a> 
+              </div>
+            </div>
+      
+            
+            <a class="navbar-item" href="./contact.html">
+              Contact
+            </a>
+            
+          </div>
+        </div>
+      </nav>
     
     <section class="hero">
       <div class="hero-body has-text-centered">
