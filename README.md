@@ -31,8 +31,8 @@ Project One
 
 ### This project has script features of:
 
-* 
-* An event listener for the save buttons to save to local storage
+* Two different APIs (IMDB and iTunes)
+* An event listener to save to local storage
 
 ### This project features responsive design using a  layout
 ### Has responsive layout for: 
