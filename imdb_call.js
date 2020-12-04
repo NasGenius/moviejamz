@@ -27,7 +27,9 @@ var movieYear = $('select').val();
 if (movieYear == 'Select Year (optional)') {
 
     
+
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_dd9jqywu/" + encodeURIComponent(movie);
+
 } else {
     var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_dd9jqywu/" + encodeURIComponent(movie) + '%20' + movieYear;
 
@@ -49,6 +51,7 @@ console.log(movieSearchURL);
   
     }
     var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_dd9jqywu/" + movieInfo.id + "/FullActor,FullCast";
+
 
     $.ajax({
         url: imdbFullActorSearchURL,
