@@ -8,7 +8,6 @@ Project One
 
 * ['MovieJamz GitHub'](https://github.com/NasGenius/moviejamz/tree/main)
 * ['MovieJamz GitHub IO']( https://nasgenius.github.io/moviejamz/)
-* ['MovieJamz Demo Video']()
 
 ![MovieJamz Demo]()
 
@@ -43,9 +42,7 @@ Project One
 * One HTML Pages
     * Index.html 
         * Contains search field. 
-* One CSS Page (Bulma Framework)
-    * Styles.css
-        * Contains styling for changing attributes and buttons
+* (Bulma Framework)
 * One Javascript Page
     * Contains
         * Variables
