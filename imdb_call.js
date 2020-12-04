@@ -27,9 +27,11 @@ var movieYear = $('select').val();
 if (movieYear == 'Select Year (optional)') {
 
     
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie);
+
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_dd9jqywu/" + encodeURIComponent(movie);
+
 } else {
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie) + '%20' + movieYear;
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_dd9jqywu/" + encodeURIComponent(movie) + '%20' + movieYear;
 
 };
     
@@ -48,7 +50,8 @@ console.log(movieSearchURL);
         id: response.results[0].id
   
     }
-    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_8pgddpof/" + movieInfo.id + "/FullActor,FullCast";
+    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_dd9jqywu/" + movieInfo.id + "/FullActor,FullCast";
+
 
     $.ajax({
         url: imdbFullActorSearchURL,
