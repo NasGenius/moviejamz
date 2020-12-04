@@ -27,9 +27,11 @@ var movieYear = $('select').val();
 if (movieYear == 'Select Year (optional)') {
 
     
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie);
+
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_dd9jqywu/" + encodeURIComponent(movie);
+
 } else {
-    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_8pgddpof/" + encodeURIComponent(movie) + '%20' + movieYear;
+    var movieSearchURL = "https://imdb-api.com/en/API/SearchMovie/k_dd9jqywu/" + encodeURIComponent(movie) + '%20' + movieYear;
 
 };
     
@@ -48,7 +50,8 @@ console.log(movieSearchURL);
         id: response.results[0].id
   
     }
-    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_8pgddpof/" + movieInfo.id + "/FullActor,FullCast";
+    var imdbFullActorSearchURL = "https://imdb-api.com/en/API/Title/k_dd9jqywu/" + movieInfo.id + "/FullActor,FullCast";
+
 
     $.ajax({
         url: imdbFullActorSearchURL,
@@ -84,51 +87,48 @@ console.log(soundtrackURL);
 
 $.ajax({ //third ajax call returns any albums related to the movie along with soundtrack info
     url: soundtrackURL,
-    method: 'GET'
+    jsonp: "callback",
+    dataType: "jsonp"
 }).then(function(response){
     console.log(response);
-    var formattedResponse = JSON.parse(response);
-    if (formattedResponse.resultCount == 0) {
+    //var formattedResponse = JSON.parse(response);
+    if (response.resultCount == 0) {
         console.log("No results found");
         $('#soundtrack').append('<div class="notification is-dark"><p class="is-size-4">No soundtrack could be found.</p></div>');
     } else {
-    for (i = 0; i < formattedResponse.resultCount; i++) {
-        console.log(formattedResponse.results[i]);
-        var genre = formattedResponse.results[i].primaryGenreName;
-        var albumRelease = formattedResponse.results[i].releaseDate;
+    for (i = 0; i < response.resultCount; i++) {
+        console.log(response.results[i]);
+        var genre = response.results[i].primaryGenreName;
+        var albumRelease = response.results[i].releaseDate;
         var albumYear = albumRelease.substr(0,4);
         console.log(albumYear);
         if (genre === "Soundtrack" && albumYear == castAndCrewInfo.year) {
             var soundtrackInfo = {
-            albumName: formattedResponse.results[i].collectionName,
-            albumID: formattedResponse.results[i].collectionId,
-            albumURL: formattedResponse.results[i].collectionViewUrl,
+            albumName: response.results[i].collectionName,
+            albumID: response.results[i].collectionId,
+            albumURL: response.results[i].collectionViewUrl,
             };
-            i = formattedResponse.resultCount;
+            i = response.resultCount;
             console.log(soundtrackInfo);
             var tracklistURL = 'https://itunes.apple.com/lookup?id=' + soundtrackInfo.albumID + '&entity=song'
             $.ajax({
                 url: tracklistURL,
-                method: "GET"
+                jsonp: "callback",
+                dataType: "jsonp"
             }).then(function(response){
-                var formattedTracklistResponse = JSON.parse(response);
-                console.log(formattedTracklistResponse);
+                //var formattedTracklistResponse = JSON.parse(response);
+                //console.log(formattedTracklistResponse);
                 $('#soundtrack').append('<div class="notification is-dark"><h3 class="has-text-weight-bold is-size-4">Soundtrack Title:</h3><p class="is-size-4">' + soundtrackInfo.albumName + '</p></div><div class="notification is-dark"><div class="content"><p><b>Tracklist</b> | Click the link to access Apple Music</p><ol type="1" id="tracklist"></ol></div></div>')
-                for (i = 1; i < formattedTracklistResponse.results[0].trackCount; i++) {
+                for (i = 1; i < response.results[0].trackCount; i++) {
                     var track = {
-                        trackNumber: formattedTracklistResponse.results[i].trackNumber,
-                        trackName: formattedTracklistResponse.results[i].trackName,
-                        trackURL: formattedTracklistResponse.results[i].trackViewUrl
+                        trackNumber: response.results[i].trackNumber,
+                        trackName: response.results[i].trackName,
+                        trackURL: response.results[i].trackViewUrl
                     };
                     console.log(track);
 
                     $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></p></li>')
                 
-
-                    
-                
-            
-
                 
                 }
             })
