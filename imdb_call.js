@@ -1,5 +1,4 @@
 
-// function for imdb api call
 
     var currentYear = moment().format('YYYY');
     console.log(currentYear);
@@ -8,13 +7,18 @@
     }
 
 
-
-/* searchBar[0].addEventListener('keyup', function(searchString) {
-    return searchBar = searchString.target.value;
-      
-});  */
-
-
+function loadSavedMusic() {
+    var storedSearches = localStorage.getItem('savedSearches');
+    var savedSongs = localStorage.getItem('savedSongs');
+    if (storedSearches) {
+        $('#no-saved-searches').attr('style','display: none');
+        $('#searched-songs').append(storedSearches);
+    }
+    if (savedSongs) {
+        $('#no-saved-songs').attr('style','display: none');
+        $('#saved-songs').append(savedSongs);
+    }
+}
 
 
 function movieSearch() {
@@ -81,7 +85,7 @@ var movieTitleEncoded = encodeURIComponent(movieTitleWithoutHyphen);
 var movieTitleWithPlus = movieTitleEncoded.replace(/%20/g,"+");
 console.log(movieTitleEncoded);
 console.log(movieTitleWithPlus);
-var soundtrackURL = 'https://itunes.apple.com/search?term=' + movieTitleWithPlus + '+soundtrack';
+var soundtrackURL = 'https://itunes.apple.com/search?term=' + movieTitleWithPlus + '+soundtrack&entity=album';
  
 console.log(soundtrackURL);
 
@@ -91,7 +95,6 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
     dataType: "jsonp"
 }).then(function(response){
     console.log(response);
-    //var formattedResponse = JSON.parse(response);
     if (response.resultCount == 0) {
         console.log("No results found");
         $('#soundtrack').append('<div class="notification is-dark"><p class="is-size-4">No soundtrack could be found.</p></div>');
@@ -102,7 +105,7 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
         var albumRelease = response.results[i].releaseDate;
         var albumYear = albumRelease.substr(0,4);
         console.log(albumYear);
-        if (genre === "Soundtrack" && albumYear == castAndCrewInfo.year) {
+        if (albumYear == castAndCrewInfo.year) {
             var soundtrackInfo = {
             albumName: response.results[i].collectionName,
             albumID: response.results[i].collectionId,
@@ -116,22 +119,24 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
                 jsonp: "callback",
                 dataType: "jsonp"
             }).then(function(response){
-                //var formattedTracklistResponse = JSON.parse(response);
-                //console.log(formattedTracklistResponse);
                 $('#soundtrack').append('<div class="notification is-dark"><h3 class="has-text-weight-bold is-size-4">Soundtrack Title:</h3><p class="is-size-4">' + soundtrackInfo.albumName + '</p></div><div class="notification is-dark"><div class="content"><p><b>Tracklist</b> | Click the link to access Apple Music</p><ol type="1" id="tracklist"></ol></div></div>')
                 for (i = 1; i < response.results[0].trackCount; i++) {
                     var track = {
                         trackNumber: response.results[i].trackNumber,
                         trackName: response.results[i].trackName,
-                        trackURL: response.results[i].trackViewUrl
+                        trackURL: response.results[i].trackViewUrl,
+                        trackArtist: response.results[i].artistName
                     };
                     console.log(track);
 
-                    $('#tracklist').append('<li class="track" ><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a></p></li>')
-                
-                
+                    $('#tracklist').append('<li><p><a href="' + track.trackURL + '" target="_blank">' + track.trackName + '</a>     <button class="button is-small track" data-trackurl="' + track.trackURL + '" data-trackname="' + track.trackName + '" data-artist="' + track.trackArtist + '">Save</button></p></li>');
                 }
-            })
+                $('#no-saved-searches').attr('style','display: none');
+                $('#searched-songs').append('<a href="' + soundtrackInfo.albumURL + '" class="navbar-item" target="_blank">' + movieInfo.title + '</a>');
+
+                var savedSearches = $('#searched-songs').html();
+                localStorage.setItem('savedSearches', savedSearches);
+            });
 
 
         } 
@@ -154,57 +159,11 @@ $.ajax({ //third ajax call returns any albums related to the movie along with so
 
 }
 
+//Event listener to load saved searches and songs
 
-//Event listener to start the search
-var trackList = $('#saved-songs')
-$('#searchBtn').on('click', function() {
-
-    //stores users input and appends to search history
-    var key = 'movietitle';
-    var value = $('#searchBar').val();
-
-    if (key && value) {
-        localStorage.setItem(key, value)
-        
-    }
-
-    for (var i = 0; i <localStorage.length; i++) {
-        const key = localStorage.key(i);
-        const value = localStorage.getItem(key)
-    
-        trackList.append(`<a href=""> ${value} </a>`) 
-    }
-    
-    movieSearch();
+$(document).ready(function() {
+    loadSavedMusic();
 });
-
-for (var i = 0; i <localStorage.length; i++) {
-    const key = localStorage.key(i);
-    const value = localStorage.getItem(key)
-
-    trackList.append(`<a href=""> ${value} </a>`) 
-}
-
-
-
-
-
-//Code to save and store songs
-
-// function saveSong(event) {
-//     event.preventDefault()
-//     var savedSongs = $('#saved-songs');
-//     savedSongs.append($('#track-name').text());
-//     localStorage.setItem = ('savedSongs', JSON.stringify(savedSongs));
-// }
-
-// $('document').on('click', {
-//     trackURL: $(this).siblings().attr('href'),
-//     trackName: $(this).siblings().text()
-// }, saveSong);
-
-
-
 
 
 //Event listener to start the search
@@ -214,51 +173,17 @@ $('#searchBtn').on('click', function(event) {
     movieSearch();
 });
 
-/////////////////////////////////////////////////
+//Event listener to save individual songs
 
-
-//Code to save and store songs
-
-/* function log() {
-    console.log('test');
-}
-
-function saveSong(event) {
-    event.preventDefault();
-    var savedSongs = $('#saved-songs');
-    savedSongs.append('<a href="' + event.data.trackURL + '" class="navbar-item" target="_blank">' + event.data.trackName + '</a>');
-    localStorage.setItem = ('savedSongs', JSON.stringify(savedSongs));
-}
-
-$(document).on('click', {
-    trackURL: $(this).siblings().attr('href'),
-    trackName: $(this).siblings().text()
-}, saveSong); */
-
-
-                       /*  
-                    }, saveSong); */
-
-/* $('.button is-small').click(function(event){
-    event.preventDefault();
-    var storedTrack = {
-        trackURL: $(this).siblings().attr('href'),
-        trackName: $(this).siblings().text()
-    }
-    $('#saved-songs').append('<a href="' + storedTrack.trackURL + '" class="navbar-item" target="_blank">' + storedTrack.trackName + '</a>')
-})
- */
-
-
-    
-
-//////////////////////////////////////////
-
-
-/* $(document).on('click', '.track', function() {
-    var saveTitle = $(this).siblings().text();
-    var saveURL = $(this).siblings().attr('href');
+$(document).on('click', '.track', function() {
+    $('#no-saved-songs').attr('style', 'display: none');
+    var saveTitle = $(this).attr('data-trackname');
+    var saveURL = $(this).attr('data-trackurl');
+    $('#saved-songs').append('<a href="' + saveURL + '" class="navbar-item" target="_blank">' + saveTitle + '</a>');
     console.log(saveTitle);
     console.log(saveURL);
-    $('#saved-songs').append('<a href="' + saveURL + '" class="navbar-item" target="_blank">' + saveTitle + '</a>')
-}); */
+    
+    
+    var savedSongs = $('#saved-songs').html();
+    localStorage.setItem('savedSongs', savedSongs);
+});
